@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   env: {
     browser: true,
@@ -19,9 +21,16 @@ module.exports = {
     "prettier/prettier": [
       "error",
       {"singleQuote": true}
-    ]
+    ],
   },
   globals: {
     document: true
+  },
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: path.resolve(__dirname, './webpack.config.js')
+      },
+    },
   },
 };
