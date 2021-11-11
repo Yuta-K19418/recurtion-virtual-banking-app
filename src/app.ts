@@ -1,16 +1,20 @@
 import BankAccount from "./clssses/BankAccount";
+import CreateInitialPage from "./createInitialPage";
+import mainBankPage from "./mainBankPage";
+
+CreateInitialPage();
 
 const config = {
   initialForm: document.getElementById('initial-form'),
   bankPage: document.getElementById('bankPage'),
 };
 
-
 function getRandomInteger(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function initializeUserAccount(){
+const InitializeUserAccount = () => {
+  
   const form = document.getElementById("bank-form");
 
   let userBankAccount = new BankAccount(
@@ -24,4 +28,11 @@ function initializeUserAccount(){
 
   // ページの非表示
   config.initialForm?.classList.add("d-none");
+
+  // 2ページ目を呼び出す
+  config.bankPage?.append(mainBankPage(userBankAccount));
 }
+
+export default InitializeUserAccount;
+
+

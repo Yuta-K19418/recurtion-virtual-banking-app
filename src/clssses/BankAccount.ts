@@ -7,11 +7,11 @@ class BankAccount {
 
   type: string = '';
 
-  accountNumber = 0;
+  accountNumber: number = 0;
 
   money: number = 0;
 
-  initialDeposit = 0;
+  initialDeposit: number = 0;
 
   constructor(
     firstName: string,
