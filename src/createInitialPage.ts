@@ -6,6 +6,7 @@ const CreateInitialPage = () => {
   
   let div1 = document.createElement("div");
   div1.classList.add("d-flex", "align-items-center", "col-md-7", "col-10");
+  div1.id = "main";
   
   let div2 = document.createElement("div");
   div2.id = "initial-form";
@@ -33,6 +34,7 @@ const CreateInitialPage = () => {
   emailInput.placeholder = "Email";
   emailInput.classList.add("form-control");
   emailInput.required =true;
+  emailInput.value = "fdsfdsf@gmail.com";
   emailDiv.append(emailInput);
   formSection.append(emailDiv);
 
@@ -44,6 +46,7 @@ const CreateInitialPage = () => {
   userFirstNameInput.placeholder = "First name";
   userFirstNameInput.classList.add("form-control");
   userFirstNameInput.required =true;
+  userFirstNameInput.value = "fdsfdsf";
   userFirstNameDiv.append(userFirstNameInput);
   formSection.append(userFirstNameDiv);
 
@@ -55,6 +58,7 @@ const CreateInitialPage = () => {
   userLastNameInput.placeholder = "Last name";
   userLastNameInput.classList.add("form-control");
   userLastNameInput.required =true;
+  userLastNameInput.value = "fdsfdsf";
   userLastNameDiv.append(userLastNameInput);
   formSection.append(userLastNameDiv);
 
@@ -66,6 +70,7 @@ const CreateInitialPage = () => {
   userFirstDepositInput.placeholder = "Enter your first deposit";
   userFirstDepositInput.classList.add("form-control");
   userFirstDepositInput.required =true;
+  userFirstDepositInput.value = "20";
   userFirstDepositDiv.append(userFirstDepositInput);
   formSection.append(userFirstDepositDiv);
 
@@ -117,11 +122,19 @@ const CreateInitialPage = () => {
 
   div2.append(formSection);
   div1.append(div2);
-  initialPage?.append(div1);
 
   let bankPageDiv = document.createElement("div");
+  bankPageDiv.classList.add("bg-green", "col-12", "text-center", "pt-md-4", "px-4", "pt-1", "text-white","d-none");
   bankPageDiv.id = "bankPage";
-  initialPage?.append(bankPageDiv);
+  div1.append(bankPageDiv);
+
+  let sidePageDiv = document.createElement("div");
+  sidePageDiv.classList.add("bg-white", "col-12", "text-center", "pt-md-4", "px-4", "pt-1", "d-none");
+  sidePageDiv.id = "sidePage";
+  div1.append(sidePageDiv);
+  initialPage?.append(div1);
+  
+  
 }
 
 export default CreateInitialPage;

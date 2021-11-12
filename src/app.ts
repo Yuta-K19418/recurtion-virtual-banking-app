@@ -1,13 +1,13 @@
+import AppConfig from "./appConfig";
 import BankAccount from "./clssses/BankAccount";
 import CreateInitialPage from "./createInitialPage";
+import DisplayBlock from "./displayBlock";
+import DisplayNone from "./displayNone";
 import mainBankPage from "./mainBankPage";
 
 CreateInitialPage();
 
-const config = {
-  initialForm: document.getElementById('initial-form'),
-  bankPage: document.getElementById('bankPage'),
-};
+const config = AppConfig();
 
 function getRandomInteger(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -27,9 +27,10 @@ const InitializeUserAccount = () => {
   );
 
   // ページの非表示
-  config.initialForm?.classList.add("d-none");
+  DisplayNone(config.initialForm);
 
   // 2ページ目を呼び出す
+  DisplayBlock(config.bankPage);
   config.bankPage?.append(mainBankPage(userBankAccount));
 }
 
