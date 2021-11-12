@@ -1,6 +1,11 @@
+import AppConfig from "./appConfig";
+import BankAccount from "./clssses/BankAccount";
+import DisplayBlock from "./displayBlock";
+import DisplayNone from "./displayNone";
 import GetBackAndNextButton from "./getBackAndNextButton";
+import mainBankPage from "./mainBankPage";
 
-const WithdrawalPage = (title: string) => {
+const WithdrawalPage = (title: string, userBankAccount: BankAccount) => {
   let mainContainer = document.createElement("div");
   mainContainer.classList.add("p-5");
 
@@ -22,6 +27,7 @@ const WithdrawalPage = (title: string) => {
   inputMoney1.type = "number";
   inputMoney1.id = "moneyWithdraw100";
   inputMoney1.placeholder = "5";
+  inputMoney1.setAttribute("data-bill", "100");
   subDiv1.append(inputMoney1);
   div1.append(label1, subDiv1);
 
@@ -38,6 +44,7 @@ const WithdrawalPage = (title: string) => {
   inputMoney2.type = "number";
   inputMoney2.id = "moneyWithdraw50";
   inputMoney2.placeholder = "1";
+  inputMoney2.setAttribute("data-bill", "50");
   subDiv2.append(inputMoney2);
   div2.append(label2, subDiv2);
 
@@ -54,6 +61,7 @@ const WithdrawalPage = (title: string) => {
   inputMoney3.type = "number";
   inputMoney3.id = "moneyWithdraw20";
   inputMoney3.placeholder = "2";
+  inputMoney3.setAttribute("data-bill", "20");
   subDiv3.append(inputMoney3);
   div3.append(label3, subDiv3);
 
@@ -70,6 +78,7 @@ const WithdrawalPage = (title: string) => {
   inputMoney4.type = "number";
   inputMoney4.id = "moneyWithdraw10";
   inputMoney4.placeholder = "3";
+  inputMoney4.setAttribute("data-bill", "10");
   subDiv4.append(inputMoney4);
   div4.append(label4, subDiv4);
 
@@ -86,6 +95,7 @@ const WithdrawalPage = (title: string) => {
   inputMoney5.type = "number";
   inputMoney5.id = "moneyWithdraw5";
   inputMoney5.placeholder = "1";
+  inputMoney5.setAttribute("data-bill", "5");
   subDiv5.append(inputMoney5);
   div5.append(label5, subDiv5);
 
@@ -102,6 +112,7 @@ const WithdrawalPage = (title: string) => {
   inputMoney6.type = "number";
   inputMoney6.id = "moneyWithdraw1";
   inputMoney6.placeholder = "4";
+  inputMoney6.setAttribute("data-bill", "1");
   subDiv6.append(inputMoney6);
   div6.append(label6, subDiv6);
 
@@ -120,12 +131,18 @@ const WithdrawalPage = (title: string) => {
   mainContainer.append(div6);
   mainContainer.append(div7);
   mainContainer.append(GetBackAndNextButton("back", "next"));
+  let backButton = mainContainer.querySelectorAll<HTMLElement>(".back-btn").item(0);
+  backButton.addEventListener("click", function(){
+    const config = AppConfig();
+    DisplayNone(config.sidePage);
+    DisplayBlock(config.bankPage);
+  });
 
   let billInputs = mainContainer.querySelectorAll<HTMLInputElement>(".bill-input");
   if (billInputs !== undefined) {
     for (let i = 0; i < billInputs.length; i++){
       billInputs[i].addEventListener("change", function(){
-        document.getElementById("withdrawTotal")!.innerHTML = billInputs[i].value;
+        document.getElementById("withdrawTotal")!.innerHTML = billSummation(billInputs, "data-bill").toString();
       });
     }
   }
@@ -134,3 +151,21 @@ const WithdrawalPage = (title: string) => {
 }
 
 export default WithdrawalPage;
+
+
+const billSummation = (inputElementNodeList: NodeListOf<HTMLInputElement>, multiplierAttribute: string): number => {
+  let sum = 0;
+
+  for (let i = 0; i < inputElementNodeList.length; i++){
+    let currentElement = inputElementNodeList[i];
+    let currentElementValue = parseInt(currentElement.value);
+
+    if (currentElement.hasAttribute(multiplierAttribute)){
+      let labelValue = currentElement.getAttribute(multiplierAttribute); 
+      currentElementValue *= labelValue !== null ? parseInt(labelValue) : 0;
+      sum += currentElementValue >= 0 ? currentElementValue : 0;
+    }
+  }
+
+  return sum;
+}

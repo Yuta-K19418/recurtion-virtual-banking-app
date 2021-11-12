@@ -6,7 +6,7 @@ function GetBackAndNextButton(backString: string, nextString: string): HTMLEleme
   let backButtonDiv = document.createElement("div");
   backButtonDiv.classList.add("col-6", "pl-0");
   let backButton = document.createElement("button");
-  backButton.classList.add("btn", "btn-outline-primary", "col-12");
+  backButton.classList.add("btn", "btn-outline-primary", "col-12", "back-btn");
   backButton.innerHTML = backString;
   backButtonDiv.append(backButton);
 

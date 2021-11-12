@@ -53,8 +53,6 @@ const mainBankPage = (userBankAccount: BankAccount) => {
       const config = AppConfig();
       DisplayNone(config?.bankPage);
       DisplayBlock(config?.sidePage);
-      config.sidePage?.append(withdrawalPage("Please Enter The Withdrawal Amount"))
-      
     }
   });
   menuSection.append(buttonSection1);
@@ -89,6 +87,11 @@ const mainBankPage = (userBankAccount: BankAccount) => {
   mainContainer.append(userInfoDiv);
   mainContainer.append(balanceSection);
   mainContainer.append(menuSection);
+
+  const config = AppConfig();
+  config.sidePage?.append(withdrawalPage("Please Enter The Withdrawal Amount", userBankAccount));
+  DisplayNone(config?.sidePage);
+  DisplayBlock(config?.bankPage);
   return mainContainer;
 }
 
